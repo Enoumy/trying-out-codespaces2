@@ -5,3 +5,12 @@ version = 3
 [[package]]
 name = "trying-out-codespaces2"
 version = "0.1.0"
+dependencies = [
+ "vox_writer",
+]
+
+[[package]]
+name = "vox_writer"
+version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f333d7cee8e3496dfe877c3093795a23eb73bb79fbf384e8174ba9c9919aa5ca"

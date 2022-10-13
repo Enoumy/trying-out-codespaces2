@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 use std::iter::FromIterator;
+use vox_writer::VoxWriter;
 
 #[derive(Debug, Hash, Eq, PartialEq, Ord, PartialOrd, Copy, Clone)]
 struct Point {
@@ -72,10 +73,19 @@ fn print_points(points: Vec<Point>) {
     }
 }
 
+fn magica_voxelize_points(points: Vec<Point>) {
+    let mut vox = VoxWriter::create_empty();
+    for Point { x, y } in points {
+        vox.add_voxel(x, y, 0, 0);
+    }
+    vox.save_to_file("output.vox".to_string())
+        .expect("Whoopsies. Failed to save vox file.")
+}
+
 fn main() {
     let width = 23;
     let height = 5;
-    let test = |a, b| {
+    let test = |a, b, f : fn(Vec<Point>)| {
         let (x0, y0, x1, y1) = match (a, b) {
             (true, true) => (1, 1, width, height),
             (false, false) => (width, height, 1, 1),
@@ -85,11 +95,13 @@ fn main() {
         let start = Point { x: x0, y: y0 };
         let end = Point { x: x1, y: y1 };
         let line = line_2d(start, end);
-        print_points(line);
+        f(line);
     };
 
-    test(false, false);
-    test(true, false);
-    test(true, true);
-    test(false, true);
+    test(false, false, print_points);
+    test(true, false, print_points);
+    test(true, true, print_points);
+    test(false, true, print_points);
+
+    test(true, true, magica_voxelize_points);
 }
