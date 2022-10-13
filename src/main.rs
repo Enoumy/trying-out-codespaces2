@@ -8,6 +8,7 @@ struct Point {
 }
 
 fn line_2d(Point { x: x0, y: y0 }: Point, Point { x: x1, y: y1 }: Point) -> Vec<Point> {
+    // http://members.chello.at/easyfilter/bresenham.html
     let dx = (x1 - x0).abs();
     let sx = if x0 < x1 { 1 } else { -1 };
     let dy = -(y1 - y0).abs();

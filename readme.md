@@ -1,3 +1,9 @@
+# WIP 
+
+Thus far there's just an implementation - or rather ripoff - of [Bresenham's
+algorithm](http://members.chello.at/easyfilter/bresenham.html).
+
+
 ```
 xxx....................
 ...xxxxxx..............
